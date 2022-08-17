@@ -1,10 +1,12 @@
 import speech_recognition as sr
-from gtts import gTTS
-from translate import Translator
 import random
 import playsound
 import os   
 import pyowm
+
+from gtts import gTTS
+from translate import Translator
+
 from city import *
 
 owm = pyowm.OWM('5d3ff5ff43be72d71e13cba6accf2337')
@@ -19,19 +21,19 @@ znak = 'how are you','How are you',"What's up","what's up",'How are you doing',\
     'how are you doing',"How's it going","how's it going","How's life","how's life"
 
 def listen():
-    voise_recognizer = sr.Recognizer()
-    with sr.Microphone() as source:
-        print('Say something: ')        
-        audio = voise_recognizer.listen(source)
+    # voise_recognizer = sr.Recognizer()
+    # with sr.Microphone() as source:
+    #     print('Say something: ')        
+    #     audio = voise_recognizer.listen(source)
 
-    try:
-        voice_text = voise_recognizer.recognize_google(audio, language='en')
-        print(f'You are said: ...{voice_text}')
-        return voice_text
-    except sr.UnknownValueError:
-        return 'Ошибка распознания!'        
-    except sr.RequestError:
-        return 'Ошибка соединения!'
+    # try:
+    #     voice_text = voise_recognizer.recognize_google(audio, language='en')
+    #     print(f'You are said: ...{voice_text}')
+    #     return voice_text
+    # except sr.UnknownValueError:
+    #     return 'Ошибка распознания!'        
+    # except sr.RequestError:
+    #     return 'Ошибка соединения!'
     text = input('Enter: ')
     print(f'Вы сказали {text}')
 
@@ -39,7 +41,7 @@ def listen():
 
 def say(text):
     voice = gTTS(text)
-    unique_file = "audio_" + str(random.randint(0,100000)) + '.mp3'  # audio .mp3
+    unique_file = "audio_" + str(random.randint(0,100000)) + '.mp3'  # audio_...mp3
     voice.save(unique_file)
 
     playsound.playsound(unique_file)    
